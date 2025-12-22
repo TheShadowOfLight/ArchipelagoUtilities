@@ -1,0 +1,16 @@
+{
+  "Aliases": [
+    {
+      "AliasName": "Tank Booster",
+      "ItemNames": [
+        "Progressive Max Ammo"
+      ]
+    },
+    {
+      "AliasName": "Treasure Cracker",
+      "ItemNames": [
+        "Progressive Treasure Cracker"
+      ]
+    }
+  ]
+}
