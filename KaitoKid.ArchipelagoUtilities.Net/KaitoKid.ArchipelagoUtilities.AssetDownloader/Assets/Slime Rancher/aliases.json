@@ -1,15 +1,36 @@
 {
   "Aliases": [
     {
-      "AliasName": "Tank Booster",
+      "AliasName": "Slimerancher_Tank_Booster",
       "ItemNames": [
         "Progressive Max Ammo"
       ]
     },
     {
-      "AliasName": "Treasure Cracker",
+      "AliasName": "Slimerancher_Treasure_Cracker",
       "ItemNames": [
         "Progressive Treasure Cracker"
+      ]
+    },
+    {
+      "AliasName": "Slimerancher_Pulse_Wave",
+      "ItemNames": [
+        "Air Burst"
+      ]
+    },
+    {
+      "AliasName": "Slimerancher_Water_Tank",
+      "ItemNames": [
+        "Liquid Slot"
+      ]
+    },
+    {
+      "AliasName": "Slimerancher_Newbuck",
+      "ItemNames": [
+        "75x Newbucks",
+        "81x Newbucks",
+        "99x Newbucks",
+        "100x Newbucks"
       ]
     }
   ]
