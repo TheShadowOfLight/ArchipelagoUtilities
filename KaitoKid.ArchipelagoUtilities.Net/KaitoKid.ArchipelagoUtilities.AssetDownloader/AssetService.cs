@@ -26,12 +26,10 @@ namespace KaitoKid.ArchipelagoUtilities.AssetDownloader
 
         public void TryDownloadGameAssets(string gameName, ArchipelagoItemSprites itemSprites, bool async)
         {
-            if (_downloadedGameZips.Contains(gameName))
+            if (!_downloadedGameZips.Add(gameName))
             {
                 return;
             }
-
-            _downloadedGameZips.Add(gameName);
 
             if (async)
             {

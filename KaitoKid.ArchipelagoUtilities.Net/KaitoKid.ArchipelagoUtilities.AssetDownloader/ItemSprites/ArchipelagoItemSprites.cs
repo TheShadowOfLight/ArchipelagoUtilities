@@ -3,7 +3,6 @@ using KaitoKid.Utilities.Interfaces;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 
 namespace KaitoKid.ArchipelagoUtilities.AssetDownloader.ItemSprites
 {
@@ -18,13 +17,16 @@ namespace KaitoKid.ArchipelagoUtilities.AssetDownloader.ItemSprites
         private Dictionary<string, List<ItemSprite>> _spritesByGame;
         private Dictionary<string, List<ItemSprite>> _spritesByItemName;
         private Dictionary<string, Dictionary<string, ItemSprite>> _spritesByGameByItemName;
+        private Func<string, ItemSpriteAliases> _aliasConversion;
 
-        public ArchipelagoItemSprites(ILogger logger, TimeSpan? timeUntilRedownloadAssets = null)
+        /// <param name="stringToAliasConversion">`stringToAliasConversion` is for converting a JSON formatted string into an ItemSpriteAliases. This ensures that the library doesn't import a JSON conversion dependency.</param>
+        public ArchipelagoItemSprites(ILogger logger,  Func<string, ItemSpriteAliases> stringToAliasConversion, TimeSpan? timeUntilRedownloadAssets = null)
         {
             _logger = logger;
             _nameCleaner = new NameCleaner();
             _assetService = new AssetService(timeUntilRedownloadAssets);
             _spritesFolder = Paths.CustomAssetsDirectory;
+            _aliasConversion = stringToAliasConversion;
             
             LoadCustomSprites();
         }
@@ -73,15 +75,12 @@ namespace KaitoKid.ArchipelagoUtilities.AssetDownloader.ItemSprites
                 var aliasesFile = Path.Combine(gameSubfolder, ALIASES_FILE_NAME);
                 if (File.Exists(aliasesFile))
                 {
-                    var jsonAliases = File.ReadAllText(aliasesFile);
-                    var options = new JsonSerializerOptions { AllowTrailingCommas = true };
-                    var aliases = JsonSerializer.Deserialize<ItemSpriteAliases>(jsonAliases, options);
-                    return aliases;
+                    return _aliasConversion(File.ReadAllText(aliasesFile));
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError($"Error getting the aliases in {gameSubfolder}. {e.Message}");
+                _logger.LogError($"Error getting the aliases in {gameSubfolder}. {e.Message}", e);
             }
 
             return new ItemSpriteAliases();
@@ -161,6 +160,13 @@ namespace KaitoKid.ArchipelagoUtilities.AssetDownloader.ItemSprites
             _assetService.TryDownloadGameAssets(gameName, this, false);
         }
 
+        /// <param name="myGameName">The name of the game you are modding.</param>
+        /// <param name="fallbackOnDifferentGameAsset">if this is true then:
+        ///- it will try to get a sprite from `myGameName` that matches the item name if the game the location is from doesn't have an asset
+        ///- if that fails, it will try to get a random sprite from any game that matches the item name
+        /// </param>
+        /// <param name="fallbackOnGenericGameAsset">it will get the default sprite of the game the location is from, if the game doesn't have an asset that matches</param>
+        /// <returns>bool - true if the function succeeded, false if failed</returns>
         public bool TryGetCustomAsset(IAssetLocation scoutedLocation, string myGameName, bool fallbackOnDifferentGameAsset, bool fallbackOnGenericGameAsset, out ItemSprite sprite)
         {
             _assetService.TryDownloadGameAssets(myGameName, this, true);
