@@ -173,6 +173,11 @@ namespace KaitoKid.ArchipelagoUtilities.Net.Client
 
         public void ToggleDeathlink()
         {
+            if (_connectionInfo == null || _deathLinkService == null)
+            {
+                throw new Exception($"You cannot toggle deathlink until you are connected to the server");
+            }
+
             if (_connectionInfo.DeathLink == true)
             {
                 _deathLinkService.DisableDeathLink();
