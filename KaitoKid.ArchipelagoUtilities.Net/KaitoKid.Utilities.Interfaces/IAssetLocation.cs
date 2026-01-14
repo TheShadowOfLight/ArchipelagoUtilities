@@ -1,4 +1,4 @@
-﻿namespace KaitoKid.ArchipelagoUtilities.AssetDownloader.ItemSprites
+﻿namespace KaitoKid.Utilities.Interfaces
 {
     public interface IAssetLocation
     {

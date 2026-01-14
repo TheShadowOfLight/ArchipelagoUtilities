@@ -1,6 +1,6 @@
 ﻿using Archipelago.MultiClient.Net.Enums;
 using System;
-using KaitoKid.ArchipelagoUtilities.AssetDownloader.ItemSprites;
+using KaitoKid.Utilities.Interfaces;
 
 namespace KaitoKid.ArchipelagoUtilities.Net.Client
 {
