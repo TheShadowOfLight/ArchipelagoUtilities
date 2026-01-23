@@ -1,36 +1,42 @@
 {
   "Aliases": [
     {
-      "AliasName": "Slimerancher_Tank_Booster",
+      "AliasName": "Slime Rancher_Tank Booster",
       "ItemNames": [
         "Progressive Max Ammo"
       ]
     },
     {
-      "AliasName": "Slimerancher_Treasure_Cracker",
+      "AliasName": "Slime Rancher_Treasure Cracker",
       "ItemNames": [
         "Progressive Treasure Cracker"
       ]
     },
     {
-      "AliasName": "Slimerancher_Pulse_Wave",
+      "AliasName": "Slime Rancher_Pulse Wave",
       "ItemNames": [
         "Air Burst"
       ]
     },
     {
-      "AliasName": "Slimerancher_Water_Tank",
+      "AliasName": "Slime Rancher_Water Tank",
       "ItemNames": [
         "Liquid Slot"
       ]
     },
     {
-      "AliasName": "Slimerancher_Newbuck",
+      "AliasName": "Slime Rancher_Newbuck",
       "ItemNames": [
         "75x Newbucks",
         "81x Newbucks",
         "99x Newbucks",
         "100x Newbucks"
+      ]
+    },
+    {
+      "AliasName": "Slime Rancher_Stonks",
+      "ItemNames": [
+        "Progressive Market Stonks"
       ]
     }
   ]
